@@ -2,7 +2,7 @@
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 var taskIdCounter = 0;
-
+var pageContentEl = document.querySelector("#page-content");
 
 // function that is collecting data and sending it elsewhere 
 var taskFormHandler = function(event) {
@@ -96,5 +96,25 @@ var createTaskEl = function(taskDataObj) {
 
 };
 
+var taskButtonHandler = function(event) {
+  console.log(event.target);
+
+  if (event.target.matches(".delete-btn")) {
+    // get the element's task id 
+    var taskId = event.target.getAttribute("data-task-id");
+    console.log(taskId);
+  }
+};
+
+// add a delete task function 
+var deleteTask = function(taskId) {
+  console.log(taskId);
+  
+  var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+  taskSelected.remove();
+};
+
+
 // event listener method 
 formEl.addEventListener("submit", taskFormHandler);
+pageContentEl.addEventListener("click", taskButtonHandler);

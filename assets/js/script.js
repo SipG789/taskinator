@@ -98,35 +98,26 @@ var createTaskEl = function(taskDataObj) {
 
 var taskButtonHandler = function(event) {
   // get target element from event 
-  var targetEl = event.target; 
-
+  var targetEl = event.target;
+  
   // edit button was clicked 
   if (targetEl.matches(".edit-btn")) {
     var taskId = targetEl.getAttribute("data-task-id");
     editTask(taskId);
   }
-  // delete button was clicked 
+  // delete button was clicked
   else if (targetEl.matches(".delete-btn")) {
-    var taskId = targetEl.getAttribute("datas-task-id");
+    var taskId = targetEl.getAttribute("data-task-id");
     deleteTask(taskId);
   }
 };
 
 // add a delete task function 
 var deleteTask = function(taskId) {
-  console.log(taskId);
-
   var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
   taskSelected.remove();
 };
-
 // add a edit task function 
-var editTask = function(taskId) {
-  console.log("editing task #" + taskId);
-
-  // get task list item element 
-  var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
-};
 
 
 // event listener method 

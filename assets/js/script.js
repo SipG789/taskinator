@@ -260,48 +260,19 @@ var saveTasks = function() {
 
 // create loadTasks function 
 var loadTasks = function() {
-  // TO DO: get task items from local storage 
-  var newTasks = localStorage.getItem("tasks");
-  console.log(newTasks);
-  if(newTasks === null) {
-    return false; 
-  }
-  // TO DO: convert tasks from the string format back into an array of objects 
-  newTasks = JSON.parse(newTasks);
-  console.log(newTasks);
-  // TO DO: iterates through a tasks array and creates task elements on the page from it. 
-  for (var i =0; i < newTasks.length; i++) {
-  
-    newTasks[i].id === taskIdCounter;
-    var listItemEl = document.createElement("li");
-    listItemEl.className = "task-item";
-    listItemEl.setAttribute("data-task-id", newTasks[i].id);
-    console.log(listItemEl);
+ var savedTasks = localStorage.getItem("tasks");
 
-    var taskInfoEl = document.createElement("div");
-    taskInfoEl.className = "task-info";
-    taskInfoEl.innerHTML = "<h3 class='task-name'>" + newTasks[i].name + "</h3><span class='task-type'>" + newTasks[i].type + "</span>";
-    listItemEl.append(taskInfoEl);
+ if (!savedTasks) {
+   return false;
+ }
 
-    var taskActionsEl = createTaskActions(newTasks[i].id);
-    listItemEl.append(taskActionsEl);
-    console.log(listItemEl);
-  
-  if(newTasks[i].status === "to-do") {
-    listItemEl.querySelector("select[name='status-change']").selectedIndex = 0;
-    tasksToDoEl.append(listItemEl);
-  } 
-  else if(newTasks[i].status === "in-progress") {
-    listItemEl.querySelector("select[name='status-change']").selectedIndex = 1;
-    tasksInProgressEl.append(listItemEl);
-  }
-  else if(newTasks[i].status === "complete") {
-    listItemEl.querySelector("select[name='status-change']").selectedIndex = 2;
-    tasksCompletedEl.append(listItemEl);
-  }
-  taskIdCounter++;
-  console.log(listItemEl);
-};
+ savedTasks = JSON.parse(savedTasks);
+
+ // loop through savedTasks array 
+ for (var i = 0; i < savedTasks.length; i++) {
+   // pass each task object into the createTaskEl() function 
+   createTaskEl(savedTasks[i]);
+ }
 };
 
 // event listener method 
